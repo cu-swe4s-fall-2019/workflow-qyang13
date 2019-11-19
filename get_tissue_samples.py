@@ -33,7 +33,7 @@ def parse_args():
     parser.add_argument('-t',
                         '--group_type',
                         type=str,
-                        help="Group type: SMTS or SMTSD",
+                        help="Group type: e.g. Blood, Heart ",
                         required=False)
 
     return parser.parse_args()
@@ -42,7 +42,7 @@ def parse_args():
 def main():
     args = parse_args()
     meta_data_file_name = args.sample_attributes
-    target_type = args.group_type
+    tissue_type = args.group_type
     out_file_name = args.out_file
 
     if (not os.path.exists(meta_data_file_name)):
@@ -53,8 +53,6 @@ def main():
     SMTS = []
     metadata_header = None
     tissue_group = []
-
-    categoraized_ids = []
     sample_info = None
 
     # Processing the meta data file
@@ -67,19 +65,16 @@ def main():
             if SAMPID_idx == -1:
                 print('The column with sample ids does not exist!')
                 sys.exit(1)
-            SMTS_idx = linear_search(target_type, metadata_header)
+            SMTS_idx = linear_search('SMTS', metadata_header)
             if SMTS_idx == -1:
                 print('The column with tissue group does not exist!')
                 sys.exit(1)
 
         else:
-            # Split lines by tab and stored them in array
-            # rstrip() returns a copy of the string
-            # with trailing characters removed
             sample_info = l.rstrip().split("\t")
             sample_id = sample_info[SAMPID_idx]
-            tissue_type = sample_info[SMTS_idx]
-            output.write(sample_id+'\t'+tissue_type+'\n')
+            if tissue_type == sample_info[SMTS_idx]:
+                output.write(sample_id+'\n')
     output.close()
     print(out_file_name + ' generated successfully!')
 
