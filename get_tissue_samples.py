@@ -54,7 +54,7 @@ def main():
     metadata_header = None
     tissue_group = []
     sample_info = None
-
+    found = 0
     # Processing the meta data file
     output = open(out_file_name, 'w')
     for l in open(meta_data_file_name):
@@ -75,6 +75,10 @@ def main():
             sample_id = sample_info[SAMPID_idx]
             if tissue_type == sample_info[SMTS_idx]:
                 output.write(sample_id+'\n')
+                found = 1
+    if found == 0:
+        print('Specified tissue type does not exist.')
+        sys.exit(1)
     output.close()
     print(out_file_name + ' generated successfully!')
 

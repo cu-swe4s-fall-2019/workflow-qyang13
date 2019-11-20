@@ -11,19 +11,19 @@
   --sample_attributes GTEx_Analysis_v8_Annotations_SampleAttributesDS.txt\
   --group_type NOTEXIST
  assert_exit_code 1
- assert_in_stdout "The column with tissue group does not exist"
+ assert_in_stdout "Specified tissue type does not exist"
 
  run test_file_not_found python get_tissue_samples.py\
   --out_file test.txt\
   --sample_attributes NOTEXIST.txt\
-  --group_type SMTS
+  --group_type Blood
  assert_exit_code 1
  assert_in_stdout "Cannot find metadata file"
 
  run test_normal python get_tissue_samples.py\
   --out_file test.txt\
   --sample_attributes GTEx_Analysis_v8_Annotations_SampleAttributesDS.txt\
-  --group_type SMTS
+  --group_type Blood
  assert_in_stdout "generated successfully"
  assert_exit_code 0
 

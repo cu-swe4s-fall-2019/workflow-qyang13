@@ -7,14 +7,16 @@ import matplotlib.pyplot as plt
 import importlib
 matplotlib.use('Agg')
 
+
 def linear_search(key, L):
     '''Linear search to find the key in a list'''
     hit = -1
     for i in range(len(L)):
         curr = L[i][0]
         if key == curr:
-            return  int(L[i][1])
+            return int(L[i][1])
     return -1
+
 
 def boxplot(meta, counts, tissue_labs, gene_labs, outfile):
     '''
@@ -93,9 +95,9 @@ def main():
         else:
             i += 1
             categoraized_ids.append([])
-            for l in open(t + '_samples.txt'):
-                l = l.rstrip().split("\n")
-                categoraized_ids[i].append(l)
+            for line in open(t + '_samples.txt'):
+                line = line.rstrip().split("\n")
+                categoraized_ids[i].append(line)
     # categoraized_ids is a 2-D array
     # 1D: Tissue type
     # 2D: SAMPID
@@ -112,9 +114,9 @@ def main():
             j += 1
             counts.append([])
             # For each sample id + gene counts
-            for l in open(t + '_counts.txt'):
-                l = l.rstrip().split("\t")
-                counts[j].append(l)
+            for line in open(t + '_counts.txt'):
+                line = line.rstrip().split("\t")
+                counts[j].append(line)
     # Counts is a 3-D array
     # 1D: Gene names
     # 2D: Sample ID and counts
