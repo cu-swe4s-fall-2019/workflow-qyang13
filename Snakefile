@@ -11,7 +11,7 @@ rule get_tissue_samples:
     output:
         expand('{ts}_samples.txt', ts=TISSUES)
     shell:
-        'for TS in {TISSUES}; do' \
+        'for TS in {TISSUES}; do ' \
         + 'python get_tissue_samples.py --output_file $TS\_samples.txt --group_type $TS --sample_attributes {input};' \
         + 'done'
 
