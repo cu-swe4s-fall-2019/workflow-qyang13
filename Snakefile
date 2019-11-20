@@ -32,4 +32,4 @@ rule box:
     output:
         'Brain-Heart-Blood-Skin_SDHB-MEN1-KCNH2-MSH2-MYL2-BRCA2.png'
     shell:
-        'python box.py --out_file {output} --genes \"{GENES}\" --tissues \"{TISSUES}\" --tissues {TISSUE_GROUP}_samples.txt'
+        'python box.py --out_file {output} --genes \"{GENES}\" --tissues \"{TISSUES}\"'
