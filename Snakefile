@@ -12,7 +12,7 @@ rule get_tissue_samples:
         expand('{ts}_samples.txt', ts=TISSUES)
     shell:
         'for TS in {TISSUES}; do ' \
-        + 'python get_tissue_samples.py --output_file $TS\_samples.txt --group_type $TS --sample_attributes {input};' \
+        + 'python get_tissue_samples.py --out_file $TS\_samples.txt --group_type $TS --sample_attributes {input};' \
         + 'done'
 
 rule get_gene_counts:
@@ -22,7 +22,7 @@ rule get_gene_counts:
         expand('{gs}_counts.txt', gs=GENES)
     shell:
         'for GS in {GENES}; do ' \
-        + 'python get_gene_counts.py --output_file $GS\_counts.txt --gene $GS --gene_reads {input}; ' \
+        + 'python get_gene_counts.py --out_file $GS\_counts.txt --gene $GS --gene_reads {input}; ' \
         + 'done'
 
 rule box:
